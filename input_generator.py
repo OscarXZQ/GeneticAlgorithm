@@ -1,3 +1,9 @@
+import networkx as nx
+from parse import write_input_file
+from utils import is_valid_solution, calculate_happiness, convert_dictionary, calculate_happiness_for_room, calculate_stress_for_room
+import sys
+import random
+
 def generate(room_to_student):
     '''
     :param room_to_student: dictionary mapping from room to student
@@ -32,8 +38,7 @@ def generate(room_to_student):
             if u < v:
                 if G.nodes[u]['room'] == G.nodes[v]['room']:
                     stress_sum = stress_sums_for_rooms[G.nodes[u]['room']]
-                    happiness_sum = happiness_sums_for_rooms[G.nodes[u]['room']]
-                    G[u][v]['stress'] = round(G[u][v]['stress'] / stress_sum * threshold, 3)
+                    G[u][v]['stress'] = round(G[u][v]['stress'] / stress_sum * threshold - random.uniform(0,1), 3)
                     print(G[u][v]['stress'], G[u][v]['happiness'])
                 else:
                     offset = round(random.uniform(0, 1), 3)
@@ -45,6 +50,7 @@ def generate(room_to_student):
                     
     n = len(G.nodes())
     write_input_file(G, s_max, str(n) + ".in")
+    return G
 
 def stress_between_rooms(room_to_student, room1, room2, G):
     stress_between_sum = 0
