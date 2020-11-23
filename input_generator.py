@@ -9,7 +9,7 @@ def generate(room_to_student):
     :param room_to_student: dictionary mapping from room to student
     :return: input file
     '''
-    s_max = 99.5
+    s_max = 99
     k = len(room_to_student)
     threshold = round (s_max / k , 3)
     G = nx.Graph()
