@@ -25,7 +25,7 @@ def generate(room_to_student):
     for u, v in G.edges():
         if u < v:
             G[u][v]['stress'] = round(random.uniform(0, 100), 3)
-            G[u][v]['happiness'] = round(random.uniform(0, 100), 3)
+            G[u][v]['happiness'] = round(random.uniform(50, 100), 3)
             
 
     # list of sums for each room
@@ -45,7 +45,7 @@ def generate(room_to_student):
                     room1, room2 = G.nodes[u]['room'], G.nodes[v]['room']
                     minimum_happiness_between_rooms = min(min_happiness_for_rooms[room1], min_happiness_for_rooms[room1])
                     G[u][v]['stress'] = threshold + offset
-                    G[u][v]['happiness'] = round( minimum_happiness_between_rooms - offset , 3)
+                    G[u][v]['happiness'] = round(minimum_happiness_between_rooms - offset , 3)
                     print((G[u][v]['stress'], G[u][v]['happiness']))
                     
     n = len(G.nodes())
