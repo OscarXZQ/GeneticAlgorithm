@@ -1,5 +1,5 @@
 import networkx as nx
-from parse import write_input_file
+from parse import write_input_file, write_output_file
 from utils import is_valid_solution, calculate_happiness, convert_dictionary, calculate_happiness_for_room, calculate_stress_for_room
 import sys
 import random
@@ -24,7 +24,7 @@ def generate(room_to_student):
     # assign random stress and happiness levels
     for u, v in G.edges():
         if u < v:
-            G[u][v]['stress'] = round(random.uniform(0, 100), 3)
+            G[u][v]['stress'] = round(random.uniform(10, 100), 3)
             G[u][v]['happiness'] = round(random.uniform(50, 100), 3)
             
 
@@ -50,6 +50,7 @@ def generate(room_to_student):
                     
     n = len(G.nodes())
     write_input_file(G, s_max, str(n) + ".in")
+    write_output_file(convert_dictionary(room_to_student), str(n) + ".out")
     return G
 
 def stress_between_rooms(room_to_student, room1, room2, G):
