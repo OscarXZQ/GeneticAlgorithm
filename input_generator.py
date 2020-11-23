@@ -9,9 +9,9 @@ def generate(room_to_student):
     :param room_to_student: dictionary mapping from room to student
     :return: input file
     '''
-    s_max = 99
+    s_max = 99.5
     k = len(room_to_student)
-    threshold = s_max / k
+    threshold = round (s_max / k , 3)
     G = nx.Graph()
     # create graph
     for room in room_to_student.keys():
@@ -24,7 +24,7 @@ def generate(room_to_student):
     # assign random stress and happiness levels
     for u, v in G.edges():
         if u < v:
-            G[u][v]['stress'] = round(random.uniform(10, 100), 3)
+            G[u][v]['stress'] = round(random.uniform(35, 100), 3)
             G[u][v]['happiness'] = round(random.uniform(50, 100), 3)
             
 
@@ -38,13 +38,13 @@ def generate(room_to_student):
             if u < v:
                 if G.nodes[u]['room'] == G.nodes[v]['room']:
                     stress_sum = stress_sums_for_rooms[G.nodes[u]['room']]
-                    G[u][v]['stress'] = round(G[u][v]['stress'] / stress_sum * threshold - random.uniform(0,1), 3)
+                    G[u][v]['stress'] = round(G[u][v]['stress'] / stress_sum * threshold - random.uniform(0,0.1), 3)
                     print(G[u][v]['stress'], G[u][v]['happiness'])
                 else:
                     offset = round(random.uniform(0, 1), 3)
                     room1, room2 = G.nodes[u]['room'], G.nodes[v]['room']
                     minimum_happiness_between_rooms = min(min_happiness_for_rooms[room1], min_happiness_for_rooms[room1])
-                    G[u][v]['stress'] = threshold + offset
+                    G[u][v]['stress'] = round(threshold + offset ,3)
                     G[u][v]['happiness'] = round(minimum_happiness_between_rooms - offset , 3)
                     print((G[u][v]['stress'], G[u][v]['happiness']))
                     
