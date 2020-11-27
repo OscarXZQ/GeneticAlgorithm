@@ -9,7 +9,7 @@ num_trials = 500
 
 def try_partition_into_k_groups(k, G, s):
     '''
-    Try partitioning the 
+    Try partitioning the graph into k groups with max stress level s.
     '''
     if k == 1:
         D = {}
