@@ -5,7 +5,7 @@ from utils import convert_dictionary
 import sys
 import random
 
-num_trials = 100
+num_trials = 500
 
 def try_partition_into_k_groups(k, G, s):
     '''
