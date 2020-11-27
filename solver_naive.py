@@ -3,6 +3,10 @@ from parse import read_input_file, write_output_file
 from utils import is_valid_solution, calculate_happiness
 from utils import convert_dictionary
 import sys
+import glob
+import os
+#import basename
+#import normpath
 
 
 def solve(G, s):
@@ -73,7 +77,7 @@ def calculate_happiness(G, lst):
 # Here's an example of how to run your solver.
 
 # Usage: python3 solver.py test.in
-
+'''
 if __name__ == '__main__':
     assert len(sys.argv) == 2
     path = sys.argv[1]
@@ -82,15 +86,20 @@ if __name__ == '__main__':
     assert is_valid_solution(D, G, s, k)
     print("Total Happiness: {}".format(calculate_happiness(D, G)))
     write_output_file(D, 'out/test.out')
-
+'''
 
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
-# if __name__ == '__main__':
-#     inputs = glob.glob('file_path/inputs/*')
-#     for input_path in inputs:
-#         output_path = 'file_path/outputs/' + basename(normpath(input_path))[:-3] + '.out'
-#         G, s = read_input_file(input_path, 100)
-#         D, k = solve(G, s)
-#         assert is_valid_solution(D, G, s, k)
-#         cost_t = calculate_happiness(T)
-#         write_output_file(D, output_path)
+if __name__ == '__main__':
+    inputs = glob.glob('./inputs/small/*')
+    for input_path in inputs:
+        output_path = './outputs/' + os.path.basename(os.path.normpath(input_path))[:-3] + '.out'
+        G, s = read_input_file(input_path, 100)
+        D, k = solve(G, s)
+        assert is_valid_solution(D, G, s, k)
+        with open(output_path, 'w') as fo:
+            goal = calculate_happiness(D, G)
+            fo.write('Total Happiness: ' + str(goal) + '\n')
+            for key, value in D.items():
+                fo.write(str(key) + " " + str(value) + "\n")
+            fo.close()
+        #write_output_file(D, output_path)
