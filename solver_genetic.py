@@ -267,11 +267,13 @@ def solve(G, s):
 
 
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
+compare = []
 if __name__ == '__main__':
-    inputs = glob.glob('inputs/large/*')
+    inputs = glob.glob('inputs/medium/*')
     for input_path in inputs:
         print(input_path)
-        output_path = 'outputs/large_genetic_nov29/' + basename(normpath(input_path))[:-3] + '.out'
+        cur_file = basename(normpath(input_path))[:-3]
+        output_path = 'outputs/medium_genetic_nov29/' + cur_file + '.out'
         G, s = read_input_file(input_path)
         D = solve(G, s)
         # D, k = solve(G, s)
@@ -279,3 +281,6 @@ if __name__ == '__main__':
         final_happiness = calculate_happiness(D, G)
         print("Final Happiness:", final_happiness)
         write_output_file(D, output_path)
+        compare.append(str(cur_file), final_happiness)
+    write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
+
