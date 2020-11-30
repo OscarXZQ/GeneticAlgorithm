@@ -256,15 +256,15 @@ def solve(G, s):
 
 # Usage: python3 solver.py test.in
 
-# if __name__ == '__main__':
-#     # assert len(sys.argv) == 2
-#     # path = sys.argv[1]
-#     path = 'inputs/large/large-1.in'
-#     G, s = read_input_file(path)
-#     D, k = solve(G, s)
-#     assert is_valid_solution(D, G, s, k)
-#     print("Total Happiness: {}".format(calculate_happiness(D, G)))
-#     write_output_file(D, 'outputs/large/large-1-mut005.out')
+if __name__ == '__main__':
+    # assert len(sys.argv) == 2
+    # path = sys.argv[1]
+    path = 'inputs/large/large-27.in'
+    G, s = read_input_file(path)
+    D, k = solve(G, s)
+    assert is_valid_solution(D, G, s, k)
+    print("Total Happiness: {}".format(calculate_happiness(D, G)))
+    write_output_file(D, 'outputs/large/large-27-try.out')
 
 
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
