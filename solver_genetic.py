@@ -255,32 +255,32 @@ def solve(G, s):
 
 # Usage: python3 solver.py test.in
 
-# if __name__ == '__main__':
-#     # assert len(sys.argv) == 2
-#     # path = sys.argv[1]
-#     path = 'inputs/large/large-1.in'
-#     G, s = read_input_file(path)
-#     D, k = solve(G, s)
-#     assert is_valid_solution(D, G, s, k)
-#     print("Total Happiness: {}".format(calculate_happiness(D, G)))
-#     write_output_file(D, 'outputs/large/large-1-mut005.out')
+if __name__ == '__main__':
+    # assert len(sys.argv) == 2
+    # path = sys.argv[1]
+    path = 'inputs/large/large-27.in'
+    G, s = read_input_file(path)
+    D, k = solve(G, s)
+    assert is_valid_solution(D, G, s, k)
+    print("Total Happiness: {}".format(calculate_happiness(D, G)))
+    write_output_file(D, 'outputs/large/large-27-try.out')
 
 
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
-compare = []
-if __name__ == '__main__':
-    inputs = glob.glob('inputs/medium/*')
-    for input_path in inputs:
-        print(input_path)
-        cur_file = basename(normpath(input_path))[:-3]
-        output_path = 'outputs/medium_genetic_nov29/' + cur_file + '.out'
-        G, s = read_input_file(input_path)
-        D = solve(G, s)
-        # D, k = solve(G, s)
-        # assert is_valid_solution(D, G, s, k)
-        final_happiness = calculate_happiness(D, G)
-        print("Final Happiness:", final_happiness)
-        write_output_file(D, output_path)
-        compare.append(str(cur_file) + str(final_happiness))
-    write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
+# compare = []
+# if __name__ == '__main__':
+#     inputs = glob.glob('inputs/medium/*')
+#     for input_path in inputs:
+#         print(input_path)
+#         cur_file = basename(normpath(input_path))[:-3]
+#         output_path = 'outputs/medium_genetic_nov29/' + cur_file + '.out'
+#         G, s = read_input_file(input_path)
+#         D = solve(G, s)
+#         # D, k = solve(G, s)
+#         # assert is_valid_solution(D, G, s, k)
+#         final_happiness = calculate_happiness(D, G)
+#         print("Final Happiness:", final_happiness)
+#         write_output_file(D, output_path)
+#         compare.append(str(cur_file) + str(final_happiness))
+#     write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
 
