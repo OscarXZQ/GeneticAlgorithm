@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--popSize', action='store', dest='popSize', default=15, help='Population Size.', type=int)
 parser.add_argument('--eliteSize', action='store', dest='eliteSize', default=2, help='Size of elites. The top ELITESIZE among living beings who will not mutate nor die.', type=int)
-parser.add_argument('--mutationRate', action='store', dest='mutationRate', default=15, help='Mutation Rate.', type=int)
+parser.add_argument('--mutationRate', action='store', dest='mutationRate', default=0.02, help='Mutation Rate.', type=int)
 parser.add_argument('--generations', action='store', dest='generations', default=200, help='Number of generations to run this algorithm.', type=int)
 parser.add_argument('--converge', action='store_true', dest='converge', default=False, help='If true, end algorithm when the score does not improve for PATIENCE generations.')
 parser.add_argument('--patience', action='store', dest='patience', default=25, help='End algorithm when the score does not improve for PATIENCE generations.', type=int)

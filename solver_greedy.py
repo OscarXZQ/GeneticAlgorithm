@@ -5,7 +5,7 @@ from utils import convert_dictionary
 import sys
 import random
 
-num_trials = 500
+num_trials = 1000
 
 def try_partition_into_k_groups(k, G, s):
     '''
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     D, k = solve(G, s)
     assert is_valid_solution(D, G, s, k)
     print("Total Happiness: {}".format(calculate_happiness(D, G)))
-    write_output_file(D, 'out/test.out')
+    write_output_file(D, 'outputs/large-1.out')
 
 
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
