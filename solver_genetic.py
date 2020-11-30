@@ -271,7 +271,7 @@ if __name__ == '__main__':
     inputs = glob.glob('inputs/large/*')
     for input_path in inputs:
         print(input_path)
-        output_path = 'outputs/large' + basename(normpath(input_path))[:-3] + '.out'
+        output_path = 'outputs/large_genetic_nov29/' + basename(normpath(input_path))[:-3] + '.out'
         G, s = read_input_file(input_path)
         D = solve(G, s)
         # D, k = solve(G, s)
