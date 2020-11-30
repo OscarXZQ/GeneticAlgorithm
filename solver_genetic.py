@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--popSize', action='store', dest='popSize', default=15, help='Population Size.', type=int)
 parser.add_argument('--eliteSize', action='store', dest='eliteSize', default=2, help='Size of elites. The top ELITESIZE among living beings who will not mutate nor die.', type=int)
-parser.add_argument('--mutationRate', action='store', dest='mutationRate', default=15, help='Mutation Rate.', type=int)
+parser.add_argument('--mutationRate', action='store', dest='mutationRate', default=0.02, help='Mutation Rate.', type=float)
 parser.add_argument('--generations', action='store', dest='generations', default=200, help='Number of generations to run this algorithm.', type=int)
 parser.add_argument('--converge', action='store_true', dest='converge', default=False, help='If true, end algorithm when the score does not improve for PATIENCE generations.')
 parser.add_argument('--patience', action='store', dest='patience', default=25, help='End algorithm when the score does not improve for PATIENCE generations.', type=int)
@@ -258,20 +258,22 @@ def solve(G, s):
 # if __name__ == '__main__':
 #     # assert len(sys.argv) == 2
 #     # path = sys.argv[1]
-#     path = 'inputs/large/large-17.in'
+#     path = 'inputs/large/large-1.in'
 #     G, s = read_input_file(path)
 #     D, k = solve(G, s)
 #     assert is_valid_solution(D, G, s, k)
 #     print("Total Happiness: {}".format(calculate_happiness(D, G)))
-#     write_output_file(D, 'outputs/large/large-17.out')
+#     write_output_file(D, 'outputs/large/large-1-mut005.out')
 
 
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
+compare = []
 if __name__ == '__main__':
-    inputs = glob.glob('inputs/large/*')
+    inputs = glob.glob('inputs/medium/*')
     for input_path in inputs:
         print(input_path)
-        output_path = 'outputs/large' + basename(normpath(input_path))[:-3] + '.out'
+        cur_file = basename(normpath(input_path))[:-3]
+        output_path = 'outputs/medium_genetic_nov29/' + cur_file + '.out'
         G, s = read_input_file(input_path)
         D = solve(G, s)
         # D, k = solve(G, s)
@@ -279,3 +281,6 @@ if __name__ == '__main__':
         final_happiness = calculate_happiness(D, G)
         print("Final Happiness:", final_happiness)
         write_output_file(D, output_path)
+        compare.append(str(cur_file) + str(final_happiness))
+    write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
+
