@@ -103,3 +103,13 @@ if __name__ == '__main__':
                 fo.write(str(key) + " " + str(value) + "\n")
             fo.close()
         #write_output_file(D, output_path)
+
+'''
+if __name__ == '__main__':
+    outputs = glob.glob('./outputs/small_naive/*')
+    for output_path in outputs:
+        with open(output_path, 'r') as fin:
+            data = fin.read().splitlines(True)
+        with open(output_path, 'w') as fout:
+            fout.writelines(data[1:])
+'''
