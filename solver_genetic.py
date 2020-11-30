@@ -268,24 +268,6 @@ if __name__ == '__main__':
 
 
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
-<<<<<<< HEAD
-# compare = []
-# if __name__ == '__main__':
-#     inputs = glob.glob('inputs/medium/*')
-#     for input_path in inputs:
-#         print(input_path)
-#         cur_file = basename(normpath(input_path))[:-3]
-#         output_path = 'outputs/medium_genetic_nov29/' + cur_file + '.out'
-#         G, s = read_input_file(input_path)
-#         D = solve(G, s)
-#         # D, k = solve(G, s)
-#         # assert is_valid_solution(D, G, s, k)
-#         final_happiness = calculate_happiness(D, G)
-#         print("Final Happiness:", final_happiness)
-#         write_output_file(D, output_path)
-#         compare.append(str(cur_file) + str(final_happiness))
-#     write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
-=======
 compare = []
 if __name__ == '__main__':
     inputs = glob.glob('inputs/large1/*') #change large1     dzj: large2 lzw: large3
@@ -304,5 +286,4 @@ if __name__ == '__main__':
             write_output_file(D, output_path)
             compare.append(str(cur_file) + str(final_happiness))
         write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
->>>>>>> 01f1095175c8d0153a70dba33fa79599a5210b46
 
