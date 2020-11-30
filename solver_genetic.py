@@ -281,6 +281,6 @@ if __name__ == '__main__':
         final_happiness = calculate_happiness(D, G)
         print("Final Happiness:", final_happiness)
         write_output_file(D, output_path)
-        compare.append(str(cur_file), final_happiness)
+        compare.append(str(cur_file) + str(final_happiness))
     write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
 
