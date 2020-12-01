@@ -260,7 +260,7 @@ def solve(G, s):
 if __name__ == '__main__':
     # assert len(sys.argv) == 2
     # path = sys.argv[1]
-    path = 'inputs/large/large-193.in'
+    path = 'inputs/large3/large-193.in'
     G, s = read_input_file(path)
     D = solve(G, s)
     assert is_valid_solution(D, G, s, k)
