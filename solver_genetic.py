@@ -1,4 +1,5 @@
-import numpy as np, random, operator, pandas as pd, matplotlib.pyplot as plt
+import numpy as np, random, operator, pandas as pd
+# matplotlib.pyplot as plt
 import networkx as nx
 from parse import read_input_file, write_output_file, read_output_file
 from utils import is_valid_solution, calculate_happiness, calculate_stress_for_room, convert_dictionary
@@ -6,7 +7,7 @@ import sys
 import glob
 from os.path import normpath, basename
 import argparse
-import pymp
+# import pymp
 
 parser = argparse.ArgumentParser()
 
@@ -259,11 +260,12 @@ def solve(G, s):
 if __name__ == '__main__':
     # assert len(sys.argv) == 2
     # path = sys.argv[1]
-    path = 'inputs/large/large-27.in'
+    path = 'inputs/large3/large-193.in'
     G, s = read_input_file(path)
-    D, k = solve(G, s)
+    D = solve(G, s)
     assert is_valid_solution(D, G, s, k)
     print("Total Happiness: {}".format(calculate_happiness(D, G)))
+<<<<<<< HEAD
     write_output_file(D, 'outputs/large/large-27-try.out')
 """
 
@@ -286,4 +288,28 @@ if __name__ == '__main__':
             write_output_file(D, output_path)
             compare.append(str(cur_file) + str(final_happiness))
         write_output_file(compare, "outputs/large2.txt")
+=======
+    write_output_file(D, 'outputs/large-193-try.out')
+
+
+# For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
+# compare = []
+# if __name__ == '__main__':
+#     inputs = glob.glob('inputs/large1/*') #change large1     dzj: large2 lzw: large3
+#     inputs = iter(inputs)
+#     with pymp.Parallel(4) as p:
+#         for input_path in p.iterate(inputs):
+#             print(input_path)
+#             cur_file = basename(normpath(input_path))[:-3]
+#             output_path = 'outputs/large_genetic/' + cur_file + '.out'
+#             G, s = read_input_file(input_path)
+#             D = solve(G, s)
+#             # D, k = solve(G, s)
+#             # assert is_valid_solution(D, G, s, k)
+#             final_happiness = calculate_happiness(D, G)
+#             print("Final Happiness:", final_happiness)
+#             write_output_file(D, output_path)
+#             compare.append(str(cur_file) + str(final_happiness))
+#         write_output_file(compare, "outputs/medium_genetic_nov29_log.txt")
+>>>>>>> 10cc357d7810170cb2cbd380f3ae01b0153c9535
 
