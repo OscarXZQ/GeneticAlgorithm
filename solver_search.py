@@ -1,7 +1,7 @@
 import networkx as nx
 from parse import read_input_file, write_output_file
 from utils import is_valid_solution, calculate_happiness
-from utils import convert_dictionary, calculate_stress_for_room
+from utils import convert_dictionary, calculate_stress_for_room, calculate_happiness_for_room
 import sys
 import random
 import glob
@@ -19,6 +19,7 @@ stop_time = None
 def try_partition_into_k_groups(k, G, s):
     threshold = s/k
     stressed_out = set()
+    seen = dict()
     l = [i for i in range(20)]
     random.shuffle(l)
     maxi = -1
@@ -38,16 +39,25 @@ def try_partition_into_k_groups(k, G, s):
         # cnt += 1
         if n == 20:
             D = {}
-            for i, group in enumerate(cur):
-                for student in group:
-                    D[student] = i
-            # print(D)
-            # assert is_valid_solution(D, G, s, k)
-            happiness = calculate_happiness(D, G)
+            happiness = 0
+            for group in cur:
+                if group in seen:
+                    happiness += seen[group]
+                else:
+                    tmp = calculate_happiness_for_room(group, G)
+                    seen[group] = tmp
+                    happiness += tmp
+
+
+            
             nonlocal maxi
             nonlocal ans
             if happiness > maxi:
                 maxi = happiness
+                D = {}
+                for i, group in enumerate(cur):
+                    for student in group:
+                        D[student] = i
                 ans = D
                 print(ans)
             return
