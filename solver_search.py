@@ -10,6 +10,7 @@ import time
 
 num_trials = 1000
 
+stop_time = None
 
 
     
@@ -24,13 +25,12 @@ def try_partition_into_k_groups(k, G, s):
     ans = None
     cnt = 0
     timeout = False
-    stop_time = time.time() + 30
     def dfs(cur, n):
         nonlocal timeout
         if timeout:
             return
         nonlocal cnt
-        if cnt % 5000 == 0:
+        if cnt % 10000 == 0:
             if time.time() > stop_time:
                 timeout = True
                 print('TIMEOUT')
@@ -83,7 +83,8 @@ def solve(G, s):
     #pass
     # n = G.size()
     n = len(G)
-    
+    global stop_time
+    stop_time = time.time() + 60
     for k in range(3, n+1):
         D = try_partition_into_k_groups(k, G, s)
         if D is not None:
