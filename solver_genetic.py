@@ -7,7 +7,7 @@ import sys
 import glob
 from os.path import normpath, basename
 import argparse
-# import pymp
+import pymp
 
 parser = argparse.ArgumentParser()
 
