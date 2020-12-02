@@ -38,7 +38,6 @@ def try_partition_into_k_groups(k, G, s):
         #         return
         # cnt += 1
         if n == 20:
-            D = {}
             happiness = 0
             for group in cur:
                 if group in seen:
@@ -59,7 +58,7 @@ def try_partition_into_k_groups(k, G, s):
                     for student in group:
                         D[student] = i
                 ans = D
-                print(ans)
+                print(ans, happiness)
             return
 
         for i, group in enumerate(cur):
@@ -95,7 +94,7 @@ def solve(G, s):
     n = len(G)
     # global stop_time
     # stop_time = time.time() + 60
-    for k in [2]:
+    for k in [3]:
         D = try_partition_into_k_groups(k, G, s)
         if D is not None:
             return (D, k)
@@ -124,7 +123,7 @@ def solve(G, s):
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
 if __name__ == '__main__':
     cnt = 0
-    inputs = glob.glob('inputs/medium_deleted/*')
+    inputs = glob.glob('inputs/medium_deleted_three/medium-165.in')
     for input_path in inputs:
         cnt += 1
         right_now = basename(normpath(input_path))[:-3]
