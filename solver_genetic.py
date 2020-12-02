@@ -260,7 +260,8 @@ if __name__ == '__main__':
     inputs = glob.glob('inputs_new/large1/*') #change large1     dzj: large2 lzw: large3
     inputs = iter(inputs)
     # with pymp.Parallel(8) as p:
-    for input_path in p.iterate(inputs):
+        # for input_path in p.iterate(inputs):
+    for input_path in inputs:
         print(input_path)
         cur_file = basename(normpath(input_path))[:-3]
         output_path = 'outputs_new/large1/' + cur_file + '.out'
