@@ -83,8 +83,12 @@ def solve(G, s):
     #pass
     # n = G.size()
     n = len(G)
-    D = try_partition_into_k_groups(3, G, s)
-    return (None, None) if D is None else (D, 3)
+    
+    for k in range(3, n+1):
+        D = try_partition_into_k_groups(3, G, s)
+        if D is not None:
+            return (D, k)
+    return (None, None)
 
 
 
