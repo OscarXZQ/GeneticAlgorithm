@@ -95,7 +95,7 @@ def solve(G, s):
     n = len(G)
     # global stop_time
     # stop_time = time.time() + 60
-    for k in [2]:
+    for k in [5]:
         D = try_partition_into_k_groups(k, G, s)
         if D is not None:
             return (D, k)
@@ -135,5 +135,6 @@ if __name__ == '__main__':
         if D is None:
             continue
         # assert is_valid_solution(D, G, s, k)
-        # cost_t = calculate_happiness(D)
+        cost_t = calculate_happiness(D, G)
+        print(cost_t)
         write_output_file(D, output_path)
