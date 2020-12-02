@@ -27,15 +27,15 @@ def try_partition_into_k_groups(k, G, s):
     timeout = False
     def dfs(cur, n):
         nonlocal timeout
-        if timeout:
-            return
-        nonlocal cnt
-        if cnt % 10000 == 0:
-            if time.time() > stop_time:
-                timeout = True
-                print('TIMEOUT')
-                return
-        cnt += 1
+        # if timeout:
+        #     return
+        # nonlocal cnt
+        # if cnt % 10000 == 0:
+        #     if time.time() > stop_time:
+        #         timeout = True
+        #         print('TIMEOUT')
+        #         return
+        # cnt += 1
         if n == 20:
             D = {}
             for i, group in enumerate(cur):
@@ -83,9 +83,9 @@ def solve(G, s):
     #pass
     # n = G.size()
     n = len(G)
-    global stop_time
-    stop_time = time.time() + 60
-    for k in range(3, n+1):
+    # global stop_time
+    # stop_time = time.time() + 60
+    for k in [2]:
         D = try_partition_into_k_groups(k, G, s)
         if D is not None:
             return (D, k)
@@ -114,7 +114,7 @@ def solve(G, s):
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
 if __name__ == '__main__':
     cnt = 0
-    inputs = glob.glob('inputs/medium_deleted_three/*')
+    inputs = glob.glob('inputs/medium_deleted/*')
     for input_path in inputs:
         cnt += 1
         right_now = basename(normpath(input_path))[:-3]
