@@ -85,7 +85,7 @@ def solve(G, s):
     n = len(G)
     
     for k in range(3, n+1):
-        D = try_partition_into_k_groups(3, G, s)
+        D = try_partition_into_k_groups(k, G, s)
         if D is not None:
             return (D, k)
     return (None, None)
