@@ -36,10 +36,11 @@ def try_partition_into_k_groups(k, G, s, goal):
     ans = None
     cnt = 0
     timeout = False
+    maxi = -1
 
     def dfs(cur, n):
         nonlocal found
-        if found:
+        if found or timeout:
             return
         # if timeout:
         #     return
@@ -59,11 +60,18 @@ def try_partition_into_k_groups(k, G, s, goal):
                     tmp = calculate_happiness_for_room(group, G)
                     seen[group] = tmp
                     happiness += tmp
+            # print("Current happiness:",happiness)
             nonlocal ans
-            if happiness >= goal:
-                ans = cur
-                print(ans, happiness)
-                found = True
+            nonlocal maxi
+            if happiness > maxi:
+                maxi = happiness
+                print("Current happiness:",happiness)
+                print(cur)
+                if happiness >= goal:
+                    print('FOUND!!!')
+                    ans = cur
+                    print(ans, happiness)
+                    found = True
             return
 
         for i, group in enumerate(cur):
