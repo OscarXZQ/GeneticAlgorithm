@@ -12,7 +12,7 @@ num_trials = 1000
 
 stop_time = None
 
-
+No1 = 2151.481
     
 
 
@@ -51,6 +51,7 @@ def try_partition_into_k_groups(k, G, s):
             
             nonlocal maxi
             nonlocal ans
+
             if happiness > maxi:
                 maxi = happiness
                 D = {}
@@ -59,6 +60,8 @@ def try_partition_into_k_groups(k, G, s):
                         D[student] = i
                 ans = D
                 print(ans, happiness)
+            if happiness >= No1:
+                return
             return
 
         for i, group in enumerate(cur):
@@ -94,7 +97,7 @@ def solve(G, s):
     n = len(G)
     # global stop_time
     # stop_time = time.time() + 60
-    for k in [5]:
+    for k in range(6, 20):
         D = try_partition_into_k_groups(k, G, s)
         if D is not None:
             return (D, k)
@@ -123,7 +126,7 @@ def solve(G, s):
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
 if __name__ == '__main__':
     cnt = 0
-    inputs = glob.glob('inputs/medium_deleted_three/medium-165.in')
+    inputs = glob.glob('inputs/medium_deleted_three/medium-8.in')
     for input_path in inputs:
         cnt += 1
         right_now = basename(normpath(input_path))[:-3]
