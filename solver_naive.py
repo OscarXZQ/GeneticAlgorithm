@@ -25,8 +25,14 @@ def solve(G, s):
     result_dic = {}
     result_k = 0
     result_happiness = 0
-    for part in partition(nodes):
+    #lst = partition(nodes)
+    lst = list(algorithm_u(nodes, 5))
+    print(lst[0])
+    print(len(lst))
+    for part in lst:
         k = len(part)
+        #if k != 5:
+        #    continue
         d = {}
         for i in range(0, k):
             d[i] = part[i]
@@ -35,10 +41,88 @@ def solve(G, s):
             continue
         happiness = calculate_happiness(d, G)
         if happiness > result_happiness:
+            print(happiness)
             result_dic = d
             result_k = k
             result_happiness = happiness
     return result_dic, result_k        
+
+def algorithm_u(ns, m):
+    def visit(n, a):
+        ps = [[] for i in range(m)]
+        for j in range(n):
+            ps[a[j + 1]].append(ns[j])
+        return ps
+
+    def f(mu, nu, sigma, n, a):
+        if mu == 2:
+            yield visit(n, a)
+        else:
+            for v in f(mu - 1, nu - 1, (mu + sigma) % 2, n, a):
+                yield v
+        if nu == mu + 1:
+            a[mu] = mu - 1
+            yield visit(n, a)
+            while a[nu] > 0:
+                a[nu] = a[nu] - 1
+                yield visit(n, a)
+        elif nu > mu + 1:
+            if (mu + sigma) % 2 == 1:
+                a[nu - 1] = mu - 1
+            else:
+                a[mu] = mu - 1
+            if (a[nu] + sigma) % 2 == 1:
+                for v in b(mu, nu - 1, 0, n, a):
+                    yield v
+            else:
+                for v in f(mu, nu - 1, 0, n, a):
+                    yield v
+            while a[nu] > 0:
+                a[nu] = a[nu] - 1
+                if (a[nu] + sigma) % 2 == 1:
+                    for v in b(mu, nu - 1, 0, n, a):
+                        yield v
+                else:
+                    for v in f(mu, nu - 1, 0, n, a):
+                        yield v
+
+    def b(mu, nu, sigma, n, a):
+        if nu == mu + 1:
+            while a[nu] < mu - 1:
+                yield visit(n, a)
+                a[nu] = a[nu] + 1
+            yield visit(n, a)
+            a[mu] = 0
+        elif nu > mu + 1:
+            if (a[nu] + sigma) % 2 == 1:
+                for v in f(mu, nu - 1, 0, n, a):
+                    yield v
+            else:
+                for v in b(mu, nu - 1, 0, n, a):
+                    yield v
+            while a[nu] < mu - 1:
+                a[nu] = a[nu] + 1
+                if (a[nu] + sigma) % 2 == 1:
+                    for v in f(mu, nu - 1, 0, n, a):
+                        yield v
+                else:
+                    for v in b(mu, nu - 1, 0, n, a):
+                        yield v
+            if (mu + sigma) % 2 == 1:
+                a[nu - 1] = 0
+            else:
+                a[mu] = 0
+        if mu == 2:
+            yield visit(n, a)
+        else:
+            for v in b(mu - 1, nu - 1, (mu + sigma) % 2, n, a):
+                yield v
+
+    n = len(ns)
+    a = [0] * (n + 1)
+    for j in range(1, m + 1):
+        a[n - m + j] = j - 1
+    return f(m, n, 0, n, a)
 
 
 # Calculate the overall possibilities of partitions
@@ -77,17 +161,17 @@ def calculate_happiness(G, lst):
 # Here's an example of how to run your solver.
 
 # Usage: python3 solver.py test.in
-'''
+
 if __name__ == '__main__':
     assert len(sys.argv) == 2
     path = sys.argv[1]
     G, s = read_input_file(path)
     D, k = solve(G, s)
-    assert is_valid_solution(D, G, s, k)
+    #assert is_valid_solution(D, G, s, k)
     print("Total Happiness: {}".format(calculate_happiness(D, G)))
-    write_output_file(D, 'out/test.out')
-'''
+    write_output_file(D, './test.out')
 
+'''
 # For testing a folder of inputs to create a folder of outputs, you can use glob (need to import it)
 if __name__ == '__main__':
     inputs = glob.glob('./inputs/small/*')
@@ -103,7 +187,7 @@ if __name__ == '__main__':
                 fo.write(str(key) + " " + str(value) + "\n")
             fo.close()
         #write_output_file(D, output_path)
-
+'''
 '''
 if __name__ == '__main__':
     outputs = glob.glob('./outputs/small_naive/*')
